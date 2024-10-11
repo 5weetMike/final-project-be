@@ -8,6 +8,7 @@ const signup = async (req, res) => {
             password: req.body.password,
           });
         console.log(user);
+
       res.status(201).json({message: "success", user: user})
     } catch (error) {
       console.log("error", error)
