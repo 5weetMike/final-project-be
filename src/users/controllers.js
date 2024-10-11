@@ -25,24 +25,19 @@ const signup = async (req, res) => {
     }
   };
 
-  const deleteUser = async (req, res) => {
-    try {
-      const userId = req.user.id;
-      const user = await User.findByIdAndDelete(userId);
-  
-      if (!user) {
-        return res.status(404).json({ message: 'User not found' });
-      }
-  
-      res.status(200).json({ message: 'Account deleted successfully' });
+  const deleteUserByUsername = async (req, res) => {
+try {
+      const deletedUser = await User.deleteOne({username: req.body.username});
+      if (user) 
+      res.status(201).json({ message: 'success', deletedUser: deletedUser});
     } catch (error) {
-      console.error('Error deleting account:', error);
-      res.status(500).json({ message: 'Failed to delete account' });
+      console.log('error deleting account:', error);
+      res.status(501).json({ message: 'failed to delete account', error: error});
     }
   };
 
 module.exports = {
   signup: signup,
   allUsers: allUsers,
-  deleteUser: deleteUser,
+  deleteUserByUsername: deleteUserByUsername,
 };
