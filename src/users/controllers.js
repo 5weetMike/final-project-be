@@ -15,6 +15,24 @@ const signup = async (req, res) => {
     }
   }
 
+// Update user details 
+const updateUser = async (req, res) => {
+  try {
+    const user = await User.findOneAndUpdate(
+      {$or: [{username: req.body.username},{email: req.body.email}] },
+      {
+        username: req.body.newusername || req.body.username,
+        email: req.body.newemail || req.body.email 
+      },
+      {new: true}
+    );
+  
+    res.status(201).json({message: "success", user: user});
+  } catch (error) {
+    res.status(501).json({message: error.message, error: error});
+  }
+};
+
   const allUsers = async (req, res) => {
     try {
       const users = await User.find({});
@@ -28,4 +46,5 @@ const signup = async (req, res) => {
 module.exports = {
   signup: signup,
   allUsers: allUsers,
+  updateUser: updateUser,
 };
