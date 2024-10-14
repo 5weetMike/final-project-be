@@ -9,6 +9,6 @@ userRouter.post("/users/signup", signup);
 //Find all Users
 userRouter.get("/users/allusers", allUsers);
 
-userRouter.del("/user/delete", deleteUser);
+userRouter.delete("/users/deleteuser", deleteUser);
 
 module.exports = userRouter;
