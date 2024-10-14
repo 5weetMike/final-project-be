@@ -1,7 +1,11 @@
 const { Router } = require("express");
 const userRouter = Router();
 
-const {signup, allUsers, deleteUser} = require("./controllers");
+
+const {signup, allUsers,updateUser} = require("./controllers");
+
+const {signup, allUsers, deleteUserByUsername} = require("./controllers");
+
 
 // signup
 userRouter.post("/users/signup", signup);
@@ -10,5 +14,8 @@ userRouter.post("/users/signup", signup);
 userRouter.get("/users/allusers", allUsers);
 
 userRouter.delete("/users/delete", deleteUser);
+
+// update user profile
+userRouter.put("/user/updateuser", updateUser);
 
 module.exports = userRouter;

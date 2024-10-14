@@ -8,12 +8,31 @@ const signup = async (req, res) => {
             password: req.body.password,
           });
         console.log(user);
+
       res.status(201).json({message: "success", user: user})
     } catch (error) {
       console.log("error", error)
         res.status(501).json({message: error.message, error: error})
     }
   }
+
+// Update user details 
+const updateUser = async (req, res) => {
+  try {
+    const user = await User.findOneAndUpdate(
+      {$or: [{username: req.body.username},{email: req.body.email}] },
+      {
+        username: req.body.newusername || req.body.username,
+        email: req.body.newemail || req.body.email 
+      },
+      {new: true}
+    );
+  
+    res.status(201).json({message: "success", user: user});
+  } catch (error) {
+    res.status(501).json({message: error.message, error: error});
+  }
+};
 
   const allUsers = async (req, res) => {
     try {
@@ -50,7 +69,6 @@ const signup = async (req, res) => {
   const deleteUser = async (req, res) => {
 try {
       const deletedUser = await User.deleteOne({username: req.body.username});
-
       res.status(201).json({ message: 'success', deletedUser: deletedUser});
     } catch (error) {
       console.log('error deleting account:', error);
@@ -63,5 +81,6 @@ try {
 module.exports = {
   signup: signup,
   allUsers: allUsers,
-  deleteUser: deleteUser,
+  updateUser: updateUser,
+  deleteUserByUsername: deleteUserByUsername,
 };
