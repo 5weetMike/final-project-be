@@ -8,6 +8,7 @@ const signup = async (req, res) => {
             password: req.body.password,
           });
         console.log(user);
+
       res.status(201).json({message: "success", user: user})
     } catch (error) {
       console.log("error", error)
@@ -43,8 +44,20 @@ const updateUser = async (req, res) => {
     }
   };
 
+  const deleteUserByUsername = async (req, res) => {
+try {
+      const deletedUser = await User.deleteOne({username: req.body.username});
+      if (user) 
+      res.status(201).json({ message: 'success', deletedUser: deletedUser});
+    } catch (error) {
+      console.log('error deleting account:', error);
+      res.status(501).json({ message: 'failed to delete account', error: error});
+    }
+  };
+
 module.exports = {
   signup: signup,
   allUsers: allUsers,
   updateUser: updateUser,
+  deleteUserByUsername: deleteUserByUsername,
 };
