@@ -13,14 +13,9 @@ userRouter.post("/users/signup", signup);
 //Find all Users
 userRouter.get("/users/allusers", allUsers);
 
+userRouter.delete("/users/delete", deleteUser);
 
 // update user profile
 userRouter.put("/user/updateuser", updateUser);
-
-
-
-userRouter.delete("/users/deleteuserbyusername", deleteUserByUsername);
-
-
 
 module.exports = userRouter;
