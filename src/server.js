@@ -13,7 +13,9 @@ const app = express();
 
 app.use(express.json());
 
-app.use(cors());
+const corsOrigin =process.env.ORIGIN
+
+app.use(cors({origin: corsOrigin}));
 
 app.get("/.netlify/functions/api/health", (req, res) => {
     res.status(200).json({ message: "API is healthy" });
