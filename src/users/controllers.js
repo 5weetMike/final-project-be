@@ -82,5 +82,5 @@ module.exports = {
   signup: signup,
   allUsers: allUsers,
   updateUser: updateUser,
-  deleteUserByUsername: deleteUserByUsername,
+  deleteUser: deleteUser
 };
