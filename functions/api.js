@@ -5,6 +5,22 @@ const connection = require("../src/db/connection");
 const app = require("../src/server");
  
 const port = process.env.PORT || 5001;
+
+const origin = process.env.ORIGIN
+const whitelist = [origin]
+
+app.use(express.json());
+
+const corsOrigin = {origin:function(origin,callback){
+  if(whitelist.includes(origin)){
+    callback(null,true)
+  }else{
+    console.log("origin: ", origin, " not allowed")
+    callback(new Error("not allowed by cors"))
+  }
+}, credentials:true}
+
+app.use(cors(corsOrigin));
  
 app.listen(port, () => {
   connection();
