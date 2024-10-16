@@ -11,7 +11,7 @@ const addDogs = async (req, res) => {
             size: req.body.size,
             toy: req.body.toy,
         });
-        const updatedUser = await User.findByIdAndUpdate(ownerId, { $push: { dogs: newDog._id } });
+        const updatedUser = await User.findOneAndUpdate({username: req.body.username}, { $push: { dogs: dog._id } });
         res.status(201).json({message: "success", dogs: dog, updateduser: updatedUser});
     } catch (error) {
         res.status(501).json({message: error.message, error: error});
