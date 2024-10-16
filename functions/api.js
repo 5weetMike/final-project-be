@@ -1,5 +1,6 @@
 require("dotenv").config();
 const serverless = require("serverless-http");
+const cors = require("cors")
  
 const connection = require("../src/db/connection");
 const app = require("../src/server");
