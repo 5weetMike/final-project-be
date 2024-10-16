@@ -6,6 +6,7 @@ const netlifyUrl = "/.netlify/functions/api"
 
 const connection = require("./db/connection");
 const userRouter = require("./users/routes");
+const dogRouter = require("./dogs/routes");
 
 const port = process.env.PORT || 5001;
 
@@ -25,7 +26,9 @@ app.use(express.json());
 //   }
 // }, credentials:true}
 
-// app.use(cors(corsOrigin));
+connection();
+app.use(userRouter);
+app.use(dogRouter);
 
 app.get("/.netlify/functions/api/health", (req, res) => {
     res.status(200).json({ message: "API is healthy" });
