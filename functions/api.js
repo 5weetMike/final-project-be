@@ -18,7 +18,7 @@ const corsOrigin = {origin:function(origin,callback){
     console.log("origin: ", origin, " not allowed")
     callback(new Error("not allowed by cors"))
   }
-}, credentials:true}
+}};
 
 app.use(cors(corsOrigin));
  
