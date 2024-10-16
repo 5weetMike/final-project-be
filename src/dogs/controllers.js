@@ -5,6 +5,7 @@ const addDogs = async (req, res) => {
     try {
         const dog = await Dog.create({
             owner: req.body.ownerId,
+            dog: req.body.dogId,
             name: req.body.name,
             breed: req.body.breed,
             age: req.body.age,
