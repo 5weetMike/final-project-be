@@ -15,6 +15,8 @@ console.log(process.env.ORIGIN)
 // const origin = process.env.ORIGIN
 // const whitelist = [origin]
 
+app.use(cors());
+
 app.use(express.json());
 
 // const corsOrigin = {origin:function(origin,callback){
