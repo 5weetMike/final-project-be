@@ -1,7 +1,9 @@
 const { Router } = require("express");
 const userRouter = Router();
 
+
 const {signup, allUsers, deleteUser, updateUser, login} = require("./controllers");
+
 
 
 // signup
