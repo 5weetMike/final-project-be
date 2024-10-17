@@ -1,4 +1,5 @@
 const User = require("./model");
+const Dog = require("../dogs/model");
 
 const signup = async (req, res) => {
     try {
@@ -46,15 +47,28 @@ async function updateUser(req, res) {
   }
 }
 
-  const allUsers = async (req, res) => {
-    try {
-      const users = await User.find({});
-      res.status(201).json({message: "success", users: users});
-    } catch (error) {
-      console.log("error", error)
-      res.status(501).json({message: error.message, error: error});
-    }
-  };
+ 
+const allUsers = async (req, res) => {
+  try {
+      const users = await User.find({}).populate('dogs', 'name breed age size toy _id');
+      const response = users.map(user => ({
+          userId: user._id,
+          username: user.username,
+          dogs: user.dogs.map(dog => ({
+              dogId: dog._id,
+              dogName: dog.name,
+              breed: dog.breed,
+              age: dog.age,
+              size: dog.size,
+              toy: dog.toy,
+          }))
+      }));
+      res.status(200).json({ message: "success", users: response });
+  } catch (error) {
+      console.error("Error fetching dog owners:", error);
+      res.status(500).json({ message: error.message });
+  }
+};
 
 //   const deleteUser = async (req, res) => {
 //     const user = await User.deleteOne({
