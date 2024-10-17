@@ -46,6 +46,7 @@ const updateUser = async (req, res) => {
   //   }
   // };
 
+//This works on FE but wont display correctly in FE console and on webpage
 //   const allUsers = async (req, res) => {
 //     try {
 //         const users = await User.find({});
@@ -97,7 +98,7 @@ const updateUser = async (req, res) => {
 //Unfinished but works
 const allUsers = async (req, res) => {
   try {
-      const users = await User.find({}).populate('dogs', 'name breed age size toy _id'); // Fetching dog details
+      const users = await User.find({}).populate('dogs', 'name breed age size toy _id');
       const response = users.map(user => ({
           userId: user._id,
           name: user.name,
