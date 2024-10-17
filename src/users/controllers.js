@@ -101,7 +101,7 @@ const allUsers = async (req, res) => {
       const users = await User.find({}).populate('dogs', 'name breed age size toy _id');
       const response = users.map(user => ({
           userId: user._id,
-          name: user.name,
+          username: user.username,
           dogs: user.dogs.map(dog => ({
               dogId: dog._id,
               dogName: dog.name,
