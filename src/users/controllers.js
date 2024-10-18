@@ -36,7 +36,7 @@ async function updateUser(req, res) {
       return res.status(400).json({ message: "Username or email is required" });
     }
     const user = await User.findOneAndUpdate(
-       {username: req.body.username},{email: req.body.email} 
+       {username: req.body.username},{email: req.body.email},
       {new: true}
     );
     if (!user) {
