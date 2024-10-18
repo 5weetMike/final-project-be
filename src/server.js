@@ -6,14 +6,31 @@ const netlifyUrl = "/.netlify/functions/api"
 
 const connection = require("./db/connection");
 const userRouter = require("./users/routes");
+const dogRouter = require("./dogs/routes");
 
 const port = process.env.PORT || 5001;
 
 const app = express();
+console.log(process.env.ORIGIN)
+// const origin = process.env.ORIGIN
+// const whitelist = [origin]
+
+app.use(cors());
 
 app.use(express.json());
 
-app.use(cors());
+// const corsOrigin = {origin:function(origin,callback){
+//   if(whitelist.includes(origin)){
+//     callback(null,true)
+//   }else{
+//     console.log("origin: ", origin, " not allowed")
+//     callback(new Error("not allowed by cors"))
+//   }
+// }, credentials:true}
+
+connection();
+app.use(userRouter);
+app.use(dogRouter);
 
 app.get("/.netlify/functions/api/health", (req, res) => {
     res.status(200).json({ message: "API is healthy" });
