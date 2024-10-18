@@ -16,6 +16,6 @@ userRouter.get("/users/allusers", allUsers);
 userRouter.delete("/users/delete", deleteUser);
 
 // update user profile
-userRouter.put("/user/updateuser", updateUser);
+userRouter.put("/users/updateuser", updateUser);
 
 module.exports = userRouter;

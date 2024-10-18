@@ -32,22 +32,22 @@ const user = await User.findOne(
 // Update user details 
 async function updateUser(req, res) {
   try {
+    if (!req.body.username && !req.body.email) {
+      return res.status(400).json({ message: "Username or email is required" });
+    }
     const user = await User.findOneAndUpdate(
-      { $or: [{ username: req.body.username }, { email: req.body.email }] },
-      {
-        username: req.body.newusername || req.body.username,
-        email: req.body.newemail || req.body.email
-      },
-      { new: true }
+       {username: req.body.username},{email: req.body.email} 
+      {new: true}
     );
-
-    res.status(201).json({ message: "success", user: user });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(201).json({message: "success", user: user});
   } catch (error) {
-    res.status(501).json({ message: error.message, error: error });
+    res.status(501).json({message: error.message });
   }
 }
 
- 
 const allUsers = async (req, res) => {
   try {
       const users = await User.find({}).populate('dogs', 'name breed age size toy _id');
