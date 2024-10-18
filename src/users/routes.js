@@ -10,7 +10,7 @@ userRouter.post("/users/signup", signup);
 userRouter.get("/users/allusers", allUsers);
 
 // update user profile
-userRouter.put("/user/updateuser", updateUser);
+userRouter.put("/users/updateuser", updateUser);
 
 
 
